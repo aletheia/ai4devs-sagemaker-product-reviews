@@ -10,11 +10,20 @@ Common ML project management involve a lot of steps to collect, prepare and feed
 ### Steps to engineer a ML project
 One of the key aspects to focus when starting a ML project is to be able to manage a workflow in a reproducible and standard way.
 Every machine learning process goes through the following steps:
-1. Data Collection
+
+1. [Data Collection](01-data-collection/README.md)
 2. Data Integration
 3. Data Preparation and Cleaning
 4. Feature Engineering
 5. Model Training & Parameter Tuning
 6. Model Deployment
 
+
+## Product Reviews Dataset
+
+In a period of over two decades since the first review in 1995, millions of Amazon customers have contributed over a hundred million reviews to express opinions and describe their experiences regarding products on the Amazon.com website. 
+
+This makes Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst others. 
+
+Accordingly, AWS is releasing this data to further research in multiple disciplines related to understanding customer product experiences. Specifically, this dataset was constructed to represent a sample of customer evaluations and opinions, variation in the perception of a product across geographical regions, and promotional intent or bias in reviews.
 
