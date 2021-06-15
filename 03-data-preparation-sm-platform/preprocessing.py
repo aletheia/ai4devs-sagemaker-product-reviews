@@ -30,7 +30,7 @@ if __name__ == '__main__':
     input_data_path = os.path.join('/opt/ml/processing/input',filename)
     print('Reading input data from {}'.format(input_data_path))
 
-    data = pd.read_csv(input_data_path, sep='\t', compression='gzip', error_bad_lines=False, dtype=str)
+    data = pd.read_csv(input_data_path, sep='\t', error_bad_lines=False, dtype=str)
 
     data.dropna(inplace=True)
 

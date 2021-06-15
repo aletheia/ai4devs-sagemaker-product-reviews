@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "version": 1,
+    "disable_limits": false
+  },
+  "nodes": [
+    {
+      "node_id": "fa72fe5d-6c2f-4360-9cd9-4682404ca87c",
+      "type": "SOURCE",
+      "operator": "sagemaker.athena_source_0.1",
+      "parameters": {
+        "dataset_definition": {
+          "datasetSourceType": "Athena",
+          "name": "amazon-products-reviews",
+          "catalogName": "AwsDataCatalog",
+          "databaseName": "ai4devs",
+          "queryString": "SELECT * FROM \"ai4devs\".\"amazon_reviews_parquet\" WHERE product_category='Video_Games'",
+          "s3OutputLocation": "s3://sagemaker-eu-west-1-101769254823/athena/",
+          "outputFormat": "parquet"
+        }
+      },
+      "trained_parameters": {
+        "query_execution_id": "df9122c2-ab5b-46f1-acb6-ab7cb46216c9",
+        "ctas_table_name": "sagemaker_tmp_da5878578a4547fc8474f16656b75b7a",
+        "ctas_s3_output_location": "s3://sagemaker-eu-west-1-101769254823/athena/da5878578a4547fc8474f16656b75b7a/data/"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "default",
+          "sampling": {
+            "sampling_method": "sample_by_limit",
+            "limit_rows": 50000
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "95086c7d-242c-41ae-a5b2-2f9ed28c0e29",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.infer_and_cast_type_0.1",
+      "parameters": {},
+      "trained_parameters": {
+        "schema": {
+          "marketplace": "string",
+          "customer_id": "long",
+          "review_id": "string",
+          "product_id": "string",
+          "product_parent": "long",
+          "product_title": "string",
+          "vine": "string",
+          "verified_purchase": "string",
+          "review_headline": "string",
+          "review_body": "string",
+          "product_category": "string",
+          "star_rating": "long",
+          "helpful_votes": "long",
+          "total_votes": "long",
+          "review_date": "long",
+          "year": "long"
+        }
+      },
+      "inputs": [
+        {
+          "name": "default",
+          "node_id": "fa72fe5d-6c2f-4360-9cd9-4682404ca87c",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "32dbb97f-ccd4-4fe3-b74f-119fa891e6ee",
+      "type": "VISUALIZATION",
+      "operator": "sagemaker.visualizations.histogram_0.1",
+      "parameters": {
+        "name": "star rating",
+        "x_axis": "star_rating"
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "95086c7d-242c-41ae-a5b2-2f9ed28c0e29",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "cb59b63e-0ebd-43a9-95a1-f128de61b1d1",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.manage_columns_0.1",
+      "parameters": {
+        "operator": "Drop column",
+        "drop_column_parameters": {
+          "column_to_drop": "product_category"
+        }
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "95086c7d-242c-41ae-a5b2-2f9ed28c0e29",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    }
+  ]
+}
